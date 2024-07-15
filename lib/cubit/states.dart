@@ -1,6 +1,8 @@
 
-class isClicked{
-  bool click;
 
-  isClicked(this.click);
+class InitialState{}
+
+class isClicked extends InitialState{
+  bool click;
+  isClicked({required this.click});
 }

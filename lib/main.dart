@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+
+      ChangeNotifierProvider(
+        create: (context) => MapsProvider(),
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,13 +17,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MapsProvider()..changeSettings(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Emergency location',
-        home: MapsPage()
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Emergency location',
+      home: MapsPage()
     );
   }
 }

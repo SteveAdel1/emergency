@@ -36,7 +36,7 @@ class Items extends StatelessWidget {
               style:TextStyle(color: Colors.black87)
                   ?.copyWith(
                   fontSize: 13,
-                  color: const Color(0xFFFFFFFF)),
+                  color: const Color(0xFF000000)),
               textAlign: TextAlign.center,
             )
           ],

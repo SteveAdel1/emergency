@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:emergency_location/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class MapsProvider extends ChangeNotifier {
+
+
 
   StreamSubscription? locationSubscription;
   var location = Location();
@@ -78,4 +81,13 @@ class MapsProvider extends ChangeNotifier {
     mapController?.animateCamera(CameraUpdate.newLatLng(
         LatLng(locationData.latitude!, locationData.longitude!)));
   }
+
+  bool click = false;
+  isClicked(){
+    click= !click;
+
+  notifyListeners();
+  }
+
+
 }
