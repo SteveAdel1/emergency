@@ -20,7 +20,7 @@ class Items extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: 5, vertical: 5),
       width: MediaQuery.sizeOf(context).width * 0.20,
-      height: MediaQuery.sizeOf(context).height * 0.1,
+      height: MediaQuery.sizeOf(context).height * 0.13,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.only(top: 15),
@@ -28,7 +28,7 @@ class Items extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-                child: Image(image: AssetImage(image), alignment: Alignment.center,width: 36,)
+                child: Image(image: AssetImage(image), alignment: Alignment.center,width: 55,)
             ),
             const Spacer(),
             Text(

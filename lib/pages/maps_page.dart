@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:emergency_location/providers/maps_provider.dart';
+import 'package:emergency_location/widgets/call.dart';
 import 'package:emergency_location/widgets/items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,107 +32,181 @@ class _MapsPageState extends State<MapsPage> {
   @override
   Widget build(BuildContext context) {
     var vm = Provider.of<MapsProvider>(context);
-    return Scaffold(
-        body: Stack(
-              alignment:Alignment.bottomCenter,
-              children: [
-                GoogleMap(
-                  zoomControlsEnabled: false,
-                  initialCameraPosition: MapsProvider().currentCameraPosition,
-                  markers: MapsProvider().markers,
-                  onMapCreated: (controller) {
-                    MapsProvider().mapController = controller;
-
-                    _completer.complete(controller);
-                    _completer.future.then((value) {
-                      value.setMapStyle(mapStyleString);
-                    });
-
-                  },
-                ),
-                vm.click ?
-                Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height * 0.20,
-                  decoration: const BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        topLeft: Radius.circular(25),
-                      ),
-                      color:Color.fromRGBO(255, 255, 255, .7)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(height: 40,),
-                              ElevatedButton(onPressed: () {
-                                vm.isClicked();
-
-                              }, child: Text("Cancel"))
-
-
-                            ],
-                          ),
-                        ]),
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              FloatingActionButton(
+                heroTag: "btn1",
+                 onPressed: (){
+      
+                 },
+                child: Icon(Icons.call),
+              ),
+              SizedBox(height: 10,),
+              FloatingActionButton(
+                heroTag: "btn2",
+                onPressed: (){
+      
+                },
+                child: Icon(Icons.video_call),
+              )
+            ],
+          ),
+        ),
+          body: Stack(
+                alignment:Alignment.bottomCenter,
+                children: [
+                  GoogleMap(
+                    zoomControlsEnabled: false,
+                    initialCameraPosition: MapsProvider().currentCameraPosition,
+                    markers: MapsProvider().markers,
+                    onMapCreated: (controller) {
+                      MapsProvider().mapController = controller;
+      
+                      _completer.complete(controller);
+                      _completer.future.then((value) {
+                        value.setMapStyle(mapStyleString);
+                      });
+      
+                    },
                   ),
-                ):
-                Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height * 0.20,
-                  decoration: const BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(25),
-                        topLeft: Radius.circular(25),
-                      ),
-                      color:Color.fromRGBO(255, 255, 255, 0.7)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                  onTap: () {
-                                    print("click");
-                                    vm.isClicked();
-                                  }
-                                  ,child: Items(image: "assets/icons/siren.png", title: "Emergency")),
-                              InkWell(
-                                  onTap: () {
-                                    print("click");
-                                    vm.isClicked();
-                                  },
-                                  child: Items(image: "assets/icons/ambulance.png", title: "Ambulance")),
-                              InkWell(
-                                  onTap: () {
-                                    print("click");
-                                    vm.isClicked();
-                                  },
-                                  child: Items(image: "assets/icons/firetruck.png", title: "Firetruck")),
-                              InkWell(
-                                  onTap: () {
-                                    print("click");
-                                    vm.isClicked();
-                                  },
-                                  child: Items(image: "assets/icons/policecar.png", title: "Police")),
-
-
-                            ],
-                          ),
-                        ]),
-                  ),
-                )
-              ],
-        ));
+                  vm.click ?
+                  Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height * 0.20,
+                    decoration: const BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(25),
+                          topLeft: Radius.circular(25),
+                        ),
+                        color:Color.fromRGBO(255, 255, 255, .7)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child:
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red, // background color
+                                    ),
+      
+                                    onPressed: ()
+                                {
+                                  showModalBottomSheet(
+                                    //backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) => Call(),
+                                  );
+                                }, child: Text("Request" , style: TextStyle(color: Colors.white),)),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                //   children: [
+                                //     ElevatedButton(
+                                //         style: ElevatedButton.styleFrom(
+                                //             fixedSize: Size(150, 20),
+                                //         alignment: Alignment.center
+                                //         )
+                                //             ,onPressed: () {
+                                //       showModalBottomSheet(
+                                //         //backgroundColor: Colors.transparent,
+                                //         context: context,
+                                //         builder: (context) => Call(),
+                                //       );
+                                //     }, child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.center,
+                                //       children: [
+                                //       Icon(Icons.call),
+                                //       Text("Call",textAlign: TextAlign.center,)
+                                //     ],)),
+                                //     ElevatedButton(
+                                //         style: ElevatedButton.styleFrom(
+                                //             fixedSize: Size(150, 20),
+                                //             alignment: Alignment.center
+                                //         )
+                                //         ,onPressed: () {
+                                //         showModalBottomSheet(
+                                //           //backgroundColor: Colors.transparent,
+                                //           context: context,
+                                //           builder: (context) => Call(),
+                                //         );
+                                //     }, child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.center,
+                                //       children: [
+                                //         Icon(Icons.video_call),
+                                //         Text("Vadio Call",textAlign: TextAlign.center,)
+                                //       ],)),
+                                //   ],
+                                // ),
+                                ElevatedButton(onPressed: ()
+                                {
+                                      vm.isClicked();
+      
+                                }, child: Text("Cncel"))
+                              ],
+                            ),
+                          ]),
+                    ),
+                  ):
+                  Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height * 0.20,
+                    decoration: const BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(25),
+                          topLeft: Radius.circular(25),
+                        ),
+                        color:Color.fromRGBO(255, 255, 255, 0.7)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      print("click");
+                                      vm.isClicked();
+                                    },
+                                    child: Items(
+                                        image: "assets/icons/ambulance.png" , title: "Ambulance")),
+                                InkWell(
+                                    onTap: () {
+                                      print("click");
+                                      vm.isClicked();
+                                    },
+                                    child: Items(image: "assets/icons/firetruck.png", title: "Firetruck")),
+                                InkWell(
+                                    onTap: () {
+                                      print("click");
+                                      vm.isClicked();
+                                    },
+                                    child: Items(image: "assets/icons/policecar.png", title: "Police")),
+                                InkWell(
+                                    onTap: () {
+                                      print("click");
+                                      vm.isClicked();
+                                    }
+                                    ,child: Items(image: "assets/icons/accident.png", title: "Accident")),
+                              ],
+                            ),
+                          ]),
+                    ),
+                  )
+                ],
+          )),
+    );
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:emergency_location/pages/maps_page.dart';
+import 'package:emergency_location/pages/splash_view.dart';
 import 'package:emergency_location/providers/maps_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Emergency location',
-      home: MapsPage()
+      home: SplashView()
     );
   }
 }

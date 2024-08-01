@@ -83,10 +83,15 @@ class MapsProvider extends ChangeNotifier {
   }
 
   bool click = false;
+  bool call = false;
   isClicked(){
     click= !click;
 
   notifyListeners();
+  }
+  isCall(){
+    call= !call;
+    notifyListeners();
   }
 
 
