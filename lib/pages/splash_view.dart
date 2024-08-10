@@ -12,7 +12,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Future.delayed(
-        const Duration(seconds: 8),
+        const Duration(seconds: 10),
             () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => MapsPage()),
             ) );
