@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:emergency_location/pages/test.dart';
 import 'package:emergency_location/providers/maps_provider.dart';
 import 'package:emergency_location/widgets/call.dart';
 import 'package:emergency_location/widgets/items.dart';
@@ -34,30 +35,6 @@ class _MapsPageState extends State<MapsPage> {
     var vm = Provider.of<MapsProvider>(context);
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              FloatingActionButton(
-                heroTag: "btn1",
-                 onPressed: (){
-      
-                 },
-                child: Icon(Icons.call),
-              ),
-              SizedBox(height: 10,),
-              FloatingActionButton(
-                heroTag: "btn2",
-                onPressed: (){
-      
-                },
-                child: Icon(Icons.video_call),
-              )
-            ],
-          ),
-        ),
           body: Stack(
                 alignment:Alignment.bottomCenter,
                 children: [
@@ -101,12 +78,15 @@ class _MapsPageState extends State<MapsPage> {
       
                                     onPressed: ()
                                 {
+                                  print("request");
                                   showModalBottomSheet(
                                     //backgroundColor: Colors.transparent,
                                     context: context,
-                                    builder: (context) => Call(),
+                                    builder: (context) => Test(),
                                   );
-                                }, child: Text("Request" , style: TextStyle(color: Colors.white),)),
+                                },
+                                    child: Text("Request" ,
+                                      style: TextStyle(color: Colors.white),)),
                                 // Row(
                                 //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 //   children: [
@@ -149,7 +129,7 @@ class _MapsPageState extends State<MapsPage> {
                                 ElevatedButton(onPressed: ()
                                 {
                                       vm.isClicked();
-      
+
                                 }, child: Text("Cncel"))
                               ],
                             ),
