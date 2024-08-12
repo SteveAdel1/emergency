@@ -39,12 +39,14 @@ dependencies:
   provider: ^6.1.2
   google_maps_flutter: ^2.7.0
   flutter_bloc: ^8.1.6
+  another_flutter_splash_screen: ^1.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
   flutter_launcher_icons: "^0.13.1"
+  another_flutter_splash_screen: ^1.2.1
 
 flutter_launcher_icons:
   flutter_launcher_icons:
@@ -69,6 +71,7 @@ flutter:
     - assets/icons/
     - assets/google_maps_theme.json
     - assets/images/
+    - assets/images/Work.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,33 +1,36 @@
-import 'package:emergency_location/pages/maps_page.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:emergency_location/pages/maps_page.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  _SplashViewState createState() => _SplashViewState();
 }
 
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(
-        const Duration(seconds: 10),
-            () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => MapsPage()),
-            ) );
     super.initState();
+    // Set a timer to navigate to the next screen after 3 seconds
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MapsPage()),
+      );
+    });
   }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration:  BoxDecoration(
-    image: DecorationImage(
-    image: AssetImage(
-    "assets/images/splash.jpg",
-    ),
-    //fit: BoxFit.cover
-    ))
+    return Scaffold(
+      body: Center(
+        child: Image.asset(
+          "assets/images/Work.png",
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
